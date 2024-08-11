@@ -2,22 +2,17 @@ import React, {useEffect, useState} from "react";
 import {Button, Form, Input, Select, Space, Spin} from "antd";
 import useDetail from "@/pages/UserCenter/hooks/useDetail.ts";
 import {PAGE_TYPE, roleOptions} from "@/pages/UserCenter/const.ts";
+import useInitDetail from "@/pages/UserCenter/hooks/useInitDetail.ts";
 
 const Details: React.FC<DetailsProps> = (props) => {
     const {data, pageType, backHome} = props;
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
 
-    // 编辑和查看时，初始化表单数据
-    useEffect(() => {
-        if (pageType === PAGE_TYPE.EDIT || pageType === PAGE_TYPE.VIEW) {
-            form.setFieldsValue(data);
-        }
-    }, [])
-
-    const isView = pageType === PAGE_TYPE.VIEW;
+    const {isView} = useInitDetail({pageType, form, data});
 
     const {handleSave} = useDetail({setLoading, pageType, backHome, data})
+
 
     return (
         <Spin spinning={loading}>

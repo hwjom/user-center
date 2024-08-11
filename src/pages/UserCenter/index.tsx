@@ -1,7 +1,7 @@
 import React, {useMemo} from "react";
-import {Button, Space, Table, Tag} from "antd";
+import {Button, Popconfirm, Space, Table, Tag} from "antd";
 import './inex.less';
-import {columns, PAGE_TYPE,  tagColorMap} from "./const";
+import {columns, PAGE_TYPE, tagColorMap} from "./const";
 import Search from "@/pages/UserCenter/Search.tsx";
 import Detail from "@/pages/UserCenter/Details.tsx";
 import useInitData from "@/pages/UserCenter/hooks/useInitData.tsx";
@@ -54,13 +54,19 @@ const Index = () => {
                         }}>
                         查看
                     </Button>
-                    <Button
-                        type="link"
-                        onClick={() => {
+                    <Popconfirm
+                        title="警告"
+                        description="是否确认删除"
+                        onConfirm={() => {
                             handleDelete(record.id);
-                        }}>
-                        删除
-                    </Button>
+                        }}
+                        okText="确认"
+                        cancelText="取消"
+                    >
+                        <Button type="link">
+                            删除
+                        </Button>
+                    </Popconfirm>
                 </Space>
             )
         }

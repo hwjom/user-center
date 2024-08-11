@@ -10,7 +10,6 @@ const Search: React.FC = forwardRef(({onSearch}, ref) => {
     }), []);
 
     const handleFinish = useCallback((values) => {
-        console.log(values)
         onSearch && onSearch(values);
     }, [])
 
